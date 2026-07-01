@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Happy Birthday</string>
+    <string name="happy_birthday_greeting_message">Happy birthday Fellow Coder!!\nWe are so happy for you!</string>
+    <string name="happy_birthday_from_message">From Android</string>
 </resources>
