@@ -27,7 +27,7 @@ class MainActivity : ComponentActivity() {
             HappyBirthdayTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     GreetingText(
-                        message = "Happy Birthday Raza Hussain!",
+                        message = "Happy Birthday Fellow Coder!",
                         from = "From Android",
                         modifier = Modifier.padding(innerPadding)
                     )
