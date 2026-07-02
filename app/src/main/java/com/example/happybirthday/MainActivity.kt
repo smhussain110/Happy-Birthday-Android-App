@@ -5,18 +5,23 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.input.rememberTextFieldState
+import androidx.compose.material3.Button
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -63,6 +68,40 @@ fun GreetingText(message: String, from: String, modifier: Modifier = Modifier) {
                 .padding(16.dp)
                 .align(alignment = Alignment.End)
         )
+        val inputFieldTextState = rememberTextFieldState(initialText = "")
+        var submittedText by remember { mutableStateOf("") }
+        OutlinedTextField(
+            state = inputFieldTextState,
+            label = { Text("Text") },
+            modifier = Modifier
+                .padding(16.dp)
+        )
+
+        println("HEREEE input field text: " + inputFieldTextState.text)
+        if (inputFieldTextState.text.toString().isNotEmpty()) {
+            Text(
+                text = "Typing Text: " + inputFieldTextState.text.toString(),
+                fontSize = 42.sp,
+                lineHeight = 60.sp,
+                modifier = Modifier
+                    .padding(16.dp)
+            )
+        }
+
+        Button(onClick = { submittedText = inputFieldTextState.text.toString() }) {
+            Text("Submit Text")
+        }
+
+        println("HEREEE submitted text: " + submittedText)
+        if (submittedText.isNotEmpty()) {
+            Text(
+                text = "Submitted Text: " + submittedText,
+                fontSize = 42.sp,
+                lineHeight = 60.sp,
+                modifier = Modifier
+                    .padding(16.dp)
+            )
+        }
     }
 }
 
