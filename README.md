@@ -19,3 +19,10 @@ Quick Video Demo: https://screen.studio/share/AY2O7Td5?state=uploading
 Tip calculator (calculates 20 percent tip):
 
 <img src="images/tip_calculator_20_percent.png" width="210">
+
+Tip calculator with tip input plus input validation checks:
+
+<img src="images/tip_calculator_tip_input_1.png" width="210">
+<img src="images/tip_calculator_tip_input_2.png" width="210">
+<img src="images/tip_calculator_tip_input_3.png" width="210">
+<img src="images/tip_calculator_tip_input_4.png" width="210">

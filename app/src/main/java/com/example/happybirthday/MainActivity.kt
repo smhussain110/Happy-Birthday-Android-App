@@ -76,17 +76,53 @@ fun TipCalculator(userName: String, modifier: Modifier = Modifier) {
                     fontSize = 64.sp,
                 ),
             modifier = Modifier
-                .padding(64.dp)
+                .padding(16.dp)
         )
-        println("here log: $totalAmountTextState")
-        val totalAmount: Double = totalAmountTextState.text.toString().toDoubleOrNull() ?: 0.0
-        val tipTwentyPercent: Double = totalAmount * 20 / 100
-        Text (
-            text = "Tip Amount (20%): $tipTwentyPercent",
-            fontSize = 42.sp,
-            lineHeight = 60.sp,
-            textAlign = TextAlign.Center
+        val tipPercentageTextState: TextFieldState =
+            rememberTextFieldState(initialText = "20.0")
+        OutlinedTextField (
+            state = tipPercentageTextState,
+            label = { Text("Tip percentage") },
+            textStyle =
+                TextStyle(
+                    fontSize = 64.sp,
+                ),
+            modifier = Modifier
+                .padding(16.dp)
         )
+        println("here log: totalAmountTextState = $totalAmountTextState, tipPercentageTextState = $tipPercentageTextState")
+        val totalAmount: Double = totalAmountTextState.text.toString().toDoubleOrNull() ?: -1.0
+        val tipPercent: Double = tipPercentageTextState.text.toString().toDoubleOrNull() ?: -1.0
+        val tipAmount: Double = totalAmount * tipPercent / 100
+        if (totalAmountTextState.text.toString().isEmpty()) {
+            Text (
+                text = "Please enter a total amount.",
+                fontSize = 42.sp,
+                lineHeight = 60.sp,
+                textAlign = TextAlign.Center
+            )
+        } else if (totalAmount < 0.0) {
+            Text (
+                text = "Please enter a valid total amount number or double",
+                fontSize = 42.sp,
+                lineHeight = 60.sp,
+                textAlign = TextAlign.Center
+            )
+        } else if (tipPercent !in 0.0..100.0) {
+            Text (
+                text = "Please enter a valid tip amount between 0 and 100 inclusive",
+                fontSize = 42.sp,
+                lineHeight = 60.sp,
+                textAlign = TextAlign.Center
+            )
+        } else {
+            Text (
+                text = "Tip Amount ($tipPercent%) = $tipAmount",
+                fontSize = 42.sp,
+                lineHeight = 60.sp,
+                textAlign = TextAlign.Center
+            )
+        }
     }
 }
 
