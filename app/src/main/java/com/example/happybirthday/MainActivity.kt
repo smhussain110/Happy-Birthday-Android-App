@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
@@ -24,7 +25,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -38,14 +39,54 @@ class MainActivity : ComponentActivity() {
         setContent {
             HappyBirthdayTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    GreetingImage(
-                        message = stringResource(R.string.happy_birthday_greeting_message),
-                        from = stringResource(R.string.happy_birthday_from_message),
+//                    GreetingImage(
+//                        message = stringResource(R.string.happy_birthday_greeting_message),
+//                        from = stringResource(R.string.happy_birthday_from_message),
+//                        modifier = Modifier.padding(innerPadding)
+//                    )
+                    TipCalculator(
+                        userName = "Raza",
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
             }
         }
+    }
+}
+
+@Composable
+fun TipCalculator(userName: String, modifier: Modifier = Modifier) {
+    Column (
+        verticalArrangement = Arrangement.Center,
+        modifier = modifier
+    ) {
+        Text (
+            text = "Hello $userName\n\nEnter Total Amount:",
+            fontSize = 48.sp,
+            lineHeight = 60.sp,
+            textAlign = TextAlign.Center
+        )
+        val totalAmountTextState: TextFieldState =
+            rememberTextFieldState(initialText = "")
+        OutlinedTextField (
+            state = totalAmountTextState,
+            label = { Text("Total Amount") },
+            textStyle =
+                TextStyle(
+                    fontSize = 64.sp,
+                ),
+            modifier = Modifier
+                .padding(64.dp)
+        )
+        println("here log: $totalAmountTextState")
+        val totalAmount: Double = totalAmountTextState.text.toString().toDoubleOrNull() ?: 0.0
+        val tipTwentyPercent: Double = totalAmount * 20 / 100
+        Text (
+            text = "Tip Amount (20%): $tipTwentyPercent",
+            fontSize = 42.sp,
+            lineHeight = 60.sp,
+            textAlign = TextAlign.Center
+        )
     }
 }
 
