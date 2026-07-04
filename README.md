@@ -15,3 +15,6 @@ Quick Video Demo: https://screen.studio/share/AY2O7Td5?state=uploading
 <img src="images/input_text_box_and_submit_button_1.png" width="210">
 <img src="images/input_text_box_and_submit_button_2.png" width="210">
 <img src="images/input_text_box_and_submit_button_3.png" width="210">
+
+Tip calculator (calculates 20 percent tip):
+<img src="images/tip_calculator_20_percent.png" width="210">
