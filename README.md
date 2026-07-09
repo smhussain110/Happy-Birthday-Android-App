@@ -26,3 +26,6 @@ Tip calculator with tip input plus input validation checks:
 <img src="images/tip_calculator_tip_input_2.png" width="210">
 <img src="images/tip_calculator_tip_input_3.png" width="210">
 <img src="images/tip_calculator_tip_input_4.png" width="210">
+
+Tip calculator: Adding unit testing and instrumentation testing:
+https://screen.studio/share/cDJiFb6s?state=uploading.
