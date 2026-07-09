@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.annotation.VisibleForTesting
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -39,11 +40,6 @@ class MainActivity : ComponentActivity() {
         setContent {
             HappyBirthdayTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-//                    GreetingImage(
-//                        message = stringResource(R.string.happy_birthday_greeting_message),
-//                        from = stringResource(R.string.happy_birthday_from_message),
-//                        modifier = Modifier.padding(innerPadding)
-//                    )
                     TipCalculator(
                         userName = "Raza",
                         modifier = Modifier.padding(innerPadding)
@@ -52,6 +48,15 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+}
+
+@VisibleForTesting
+internal fun calculateTipAmount(
+    totalAmount: Double,
+    tipPercentage: Double
+): Double {
+    val tipAmount: Double = totalAmount * tipPercentage / 100
+    return tipAmount
 }
 
 @Composable
@@ -93,7 +98,10 @@ fun TipCalculator(userName: String, modifier: Modifier = Modifier) {
         println("here log: totalAmountTextState = $totalAmountTextState, tipPercentageTextState = $tipPercentageTextState")
         val totalAmount: Double = totalAmountTextState.text.toString().toDoubleOrNull() ?: -1.0
         val tipPercent: Double = tipPercentageTextState.text.toString().toDoubleOrNull() ?: -1.0
-        val tipAmount: Double = totalAmount * tipPercent / 100
+        val tipAmount: Double = calculateTipAmount(
+            totalAmount = totalAmount,
+            tipPercentage = tipPercent
+        )
         if (totalAmountTextState.text.toString().isEmpty()) {
             Text (
                 text = "Please enter a total amount.",
@@ -110,14 +118,14 @@ fun TipCalculator(userName: String, modifier: Modifier = Modifier) {
             )
         } else if (tipPercent !in 0.0..100.0) {
             Text (
-                text = "Please enter a valid tip amount between 0 and 100 inclusive",
+                text = "Please enter a valid tip amount (valid integer or double) and between 0.0 and 100.0 inclusive",
                 fontSize = 42.sp,
                 lineHeight = 60.sp,
                 textAlign = TextAlign.Center
             )
         } else {
             Text (
-                text = "Tip Amount ($tipPercent%) = $tipAmount",
+                text = "Tip Amount = $tipAmount",
                 fontSize = 42.sp,
                 lineHeight = 60.sp,
                 textAlign = TextAlign.Center
