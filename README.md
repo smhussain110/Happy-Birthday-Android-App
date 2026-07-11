@@ -29,3 +29,6 @@ Tip calculator with tip input plus input validation checks:
 
 Tip calculator: Adding unit testing and instrumentation testing:
 https://screen.studio/share/cDJiFb6s?state=uploading.
+
+Affirmations scrollable list: `@Composable` `AffirmationList()` in `MainActivity.kt`.
+Walkthrough: https://screen.studio/share/cB1Mevr6.

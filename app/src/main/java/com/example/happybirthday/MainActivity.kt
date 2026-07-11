@@ -11,9 +11,11 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.material3.Button
+import androidx.compose.material3.Card
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -40,10 +42,22 @@ class MainActivity : ComponentActivity() {
         setContent {
             HappyBirthdayTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    TipCalculator(
-                        userName = "Raza",
-                        modifier = Modifier.padding(innerPadding)
+                    // Hard coded the affirmation quotes for now.
+                    val affirmationList: List<String> = listOf(
+                        "Hello World!!",
+                        "Keep Going!!",
+                        "You can do it!!",
+                        "Just do it.",
+                        "What is up",
+                        "What is happening",
+                        "Lets crush it today",
+                        "Lets do it today"
                     )
+                    // Call the Affirmation List Composable - this displays these
+                    // affirmation quotes as list
+                    AffirmationList(
+                        affirmationList = affirmationList,
+                        modifier = Modifier.padding(innerPadding))
                 }
             }
         }
@@ -218,5 +232,44 @@ fun BirthdayCardPreview() {
     HappyBirthdayTheme {
         // GreetingText("Happy birthday Fellow Coder!", from = "From Android")
         GreetingImage("Happy birthday Fellow Coder!", from = "From Android")
+    }
+}
+
+@Composable
+fun AffirmationCard(affirmationText: String, modifier: Modifier = Modifier) {
+    Card(modifier = modifier) {
+        Text(
+            text = "Affirmation Text: $affirmationText",
+            fontSize = 42.sp,
+            lineHeight = 60.sp,
+            modifier = Modifier
+                .padding(16.dp)
+        )
+    }
+}
+
+@Composable
+fun AffirmationList(affirmationList: List<String>, modifier: Modifier = Modifier) {
+    // Using Lazy column makes it into a scrollable list.
+    LazyColumn(modifier = modifier) {
+        items(affirmationList.size) { index ->
+            AffirmationCard(affirmationList[index], modifier)
+        }
+    }
+}
+
+@Preview
+@Composable
+fun AffirmationCardPreview() {
+    HappyBirthdayTheme {
+        AffirmationCard("Keep Going!!")
+    }
+}
+
+@Preview
+@Composable
+fun AffirmationListPreview() {
+    HappyBirthdayTheme {
+        AffirmationList(listOf("Keep Going!!", "Keep Going!!"))
     }
 }
